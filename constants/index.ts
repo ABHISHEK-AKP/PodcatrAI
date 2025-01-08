@@ -49,55 +49,55 @@ export const sidebarLinks = [
       title: "The Joe Rogan Experience",
       description: "A long form, in-depth conversation",
       imgURL:
-        "https://lovely-flamingo-139.convex.cloud/api/storage/3106b884-548d-4ba0-a179-785901f69806",
+        "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/podcast-flyer-design-template-3ce21c5402ef1464c2a3aab861b78f53_screen.jpg?ts=1643651595",
     },
     {
       id: 2,
       title: "The Futur",
       description: "This is how the news should sound",
       imgURL:
-        "https://lovely-flamingo-139.convex.cloud/api/storage/16fbf9bd-d800-42bc-ac95-d5a586447bf6",
+        "https://img.pikbest.com/origin/06/20/08/47hpIkbEsTr7g.jpg!w700wp",
     },
     {
       id: 3,
       title: "Waveform",
       description: "Join Michelle Obama in conversation",
       imgURL:
-        "https://lovely-flamingo-139.convex.cloud/api/storage/60f0c1d9-f2ac-4a96-9178-f01d78fa3733",
+        "https://img.pikbest.com/templates/20241220/podcast-live-talk-show-social-media-post-banner-square-instagram-design-template_11280411.jpg!w700wp",
     },
     {
       id: 4,
       title: "The Tech Talks Daily Podcast",
       description: "This is how the news should sound",
       imgURL:
-        "https://lovely-flamingo-139.convex.cloud/api/storage/5ba7ed1b-88b4-4c32-8d71-270f1c502445",
+        "https://img.pikbest.com/origin/10/14/37/336pIkbEsTBmZ.png!w700wp",
     },
     {
       id: 5,
       title: "GaryVee Audio Experience",
       description: "A long form, in-depth conversation",
       imgURL:
-        "https://lovely-flamingo-139.convex.cloud/api/storage/ca7cb1a6-4919-4b2c-a73e-279a79ac6d23",
+        "https://img.pikbest.com/origin/06/40/43/40xpIkbEsTtRZ.jpg!w700wp",
     },
     {
       id: 6,
       title: "Syntax ",
       description: "Join Michelle Obama in conversation",
       imgURL:
-        "https://lovely-flamingo-139.convex.cloud/api/storage/b8ea40c7-aafb-401a-9129-73c515a73ab5",
+        "https://img.pikbest.com/templates/20240831/podcast-social-media-post-or-talk-show-instagram-promotion-banner-template_10780558.jpg!w700wp",
     },
     {
       id: 7,
       title: "IMPAULSIVE",
       description: "A long form, in-depth conversation",
       imgURL:
-        "https://lovely-flamingo-139.convex.cloud/api/storage/8a55d662-fe3f-4bcf-b78b-3b2f3d3def5c",
+        "https://img.pikbest.com/templates/20241220/creative-podcast-live-talk-show-social-media-banner-instagram-post-square-template_11280410.jpg!w700wp",
     },
     {
       id: 8,
       title: "Ted Tech",
       description: "This is how the news should sound",
       imgURL:
-        "https://lovely-flamingo-139.convex.cloud/api/storage/221ee4bd-435f-42c3-8e98-4a001e0d806e",
+        "https://img.pikbest.com/origin/10/12/04/08ppIkbEsTy2J.jpg!w700wp",
     },
   ];
