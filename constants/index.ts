@@ -53,7 +53,7 @@ export const sidebarLinks = [
     },
     {
       id: 2,
-      title: "The Futur",
+      title: "The Future",
       description: "This is how the news should sound",
       imgURL:
         "https://img.pikbest.com/origin/06/20/08/47hpIkbEsTr7g.jpg!w700wp",
