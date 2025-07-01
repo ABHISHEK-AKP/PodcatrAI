@@ -13,7 +13,11 @@ const nextConfig = {
         {
             protocol: 'https',
             hostname: 'img.pikbest.com'
-          }
+        },
+        {
+          protocol: 'https',
+          hostname: 'original-ibis-90.convex.cloud'
+        }
       ]
     }
   };

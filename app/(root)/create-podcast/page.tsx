@@ -30,6 +30,7 @@ import { Textarea } from '@/components/ui/textarea'
 import GeneratePodcast from '@/components/GeneratePodcast'
 import GenerateThumbnail from '@/components/GenerateThumbnail'
 import { Loader } from 'lucide-react'
+import { toast } from 'sonner'
 
 const CreatePodcast = () => {
   const voiceCategories=['alloy','shimmer','nova','echo','fable','onyx'];
@@ -44,7 +45,7 @@ const CreatePodcast = () => {
   const [voiceType, setVoiceType] = useState<string |null>(null)
   const [voicePrompt, setVoicePrompt] = useState('');
   
-  const [isSubmitting, setIsSubmitting]=useState(true);
+  const [isSubmitting, setIsSubmitting]=useState(false);
   const formSchema = z.object({
     podCastTitle: z.string().min(2),
     podcastDescription: z.string().min(2),
@@ -58,9 +59,13 @@ const CreatePodcast = () => {
     },
   })
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values)
+    try {
+      
+    } catch (error) {
+      console.log(error);
+      toast.error("Error submitting podcast");
+      setIsSubmitting(false);
+    }
   }
   return (
     <section className='flex flex-col mt-10'>
@@ -122,13 +127,18 @@ const CreatePodcast = () => {
           <GeneratePodcast
           setAudioStorageId={setAudioStorageId}
           setAudio={setAudioUrl}
-          voiceType={voiceType}
+          voiceType={voiceType!}
           audio={audioUrl}
           voicePrompt={voicePrompt}
           setVoicePrompt={setVoicePrompt}
           setAudioDuration={setAudioDuration}
           />
-          <GenerateThumbnail/>
+          <GenerateThumbnail
+          setImage = {setImageUrl}
+          setImageStorageId={setImageStorageId}
+          image={imageUrl}
+          imagePrompt={imagePrompt}
+          setImagePrompt={setImagePrompt}/>
           </div>
           <div className='mt-10 w-full'>
         <Button type="submit" className='text-16 w-full bg-orange-1 py-4 font-extrabold text-white-1 transition-all durartion-500 hover:bg-black-1'>
