@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 
  
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
+import { set, useForm } from "react-hook-form"
 import { z } from "zod"
  
 import { Button } from "@/components/ui/button"
@@ -31,8 +31,13 @@ import GeneratePodcast from '@/components/GeneratePodcast'
 import GenerateThumbnail from '@/components/GenerateThumbnail'
 import { Loader } from 'lucide-react'
 import { toast } from 'sonner'
+import { useMutation } from 'convex/react'
+import { api } from '@/convex/_generated/api'
+import { Id } from '@/convex/_generated/dataModel'
+import { useRouter } from 'next/navigation'
 
 const CreatePodcast = () => {
+  const router=useRouter();
   const voiceCategories=['alloy','shimmer','nova','echo','fable','onyx'];
   const [imageStorageId, setImageStorageId] = useState<Id<"_storage"> | null>(null);
   const [imagePrompt, setImagePrompt] = useState('');
@@ -46,21 +51,44 @@ const CreatePodcast = () => {
   const [voicePrompt, setVoicePrompt] = useState('');
   
   const [isSubmitting, setIsSubmitting]=useState(false);
+
+  const createPodcast = useMutation(api.podcast.createPodcast);
   const formSchema = z.object({
-    podCastTitle: z.string().min(2),
+    podcastTitle: z.string().min(2),
     podcastDescription: z.string().min(2),
   })
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      podCastTitle: "",
+      podcastTitle: "",
       podcastDescription: "",
     },
   })
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(data: z.infer<typeof formSchema>) {
     try {
-      
+      setIsSubmitting(true);
+      if(!audioUrl || !imageUrl || !voiceType){
+        toast("Please generate audio and thumbnail");
+        setIsSubmitting(false);
+        throw new Error("Please generate audio and thumbnail");
+      }
+      await createPodcast({
+        podcastTitle : data.podcastTitle,
+        podcastDescriptions : data.podcastDescription,
+        audioUrl,
+        imageUrl,
+        voiceType,
+        imagePrompt,
+        voicePrompt,
+        views:0,
+        audioDuration,
+        audioStorageId,
+        imageStorageId
+      }) 
+      toast.success("Podcast created successfully");
+      setIsSubmitting(false);
+      router.push("/");
     } catch (error) {
       console.log(error);
       toast.error("Error submitting podcast");
@@ -75,7 +103,7 @@ const CreatePodcast = () => {
         <div className="flex flex-col gap-[30px] border-b border-black-5 pb-10">
         <FormField
           control={form.control}
-          name="podCastTitle"
+          name="podcastTitle"
           render={({ field }) => (
             <FormItem className='flex flex-col gap-2.5'>
               <FormLabel className='text-16 font-boold text-white-1'>Title</FormLabel>
