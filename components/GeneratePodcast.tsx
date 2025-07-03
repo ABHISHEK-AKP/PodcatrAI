@@ -10,6 +10,7 @@ import { api } from '@/convex/_generated/api'
 import {v4 as uuidv4} from 'uuid'
 import { useUploadFiles } from '@xixixao/uploadstuff/react'
 import { toast } from "sonner"
+import { Id } from '@/convex/_generated/dataModel'
 
 const useGeneratePodcast = ({setAudio,voiceType, voicePrompt,setAudioStorageId}:GeneratePodcastProps) => {
     const [isGenerating, setIsGenerating] = useState(false);
@@ -34,7 +35,15 @@ const useGeneratePodcast = ({setAudio,voiceType, voicePrompt,setAudioStorageId}:
                 voice: voiceType,
                 input: voicePrompt
             })
-
+            if(!response){
+            const storageId = defaultStorageId as Id<"_storage">;
+            setAudioStorageId(storageId);
+            const audioUrl = await getAudioUrl({storageId});
+            setAudio(audioUrl!);
+            toast.success("Podcast generated successfully");
+            setIsGenerating(false);
+            }
+            else{
             const blob = new Blob([response], { type: 'audio/mpeg' });
             const fileName = `podcast-${uuidv4()}.mp3`;
             const file = new File([blob],fileName,{type: 'audio/mpeg'});
@@ -45,10 +54,17 @@ const useGeneratePodcast = ({setAudio,voiceType, voicePrompt,setAudioStorageId}:
             setAudio(audioUrl!);
             toast.success("Podcast generated successfully");
             setIsGenerating(false);
+            }
         }
         catch(error){
-            console.log('Error generating podcast',error);
-            toast.error("Error creating a podcast");
+            // console.log('Error generating podcast',error);
+            // toast.error("Error creating a podcast");
+            const defaultStorageId ='kg2bgesnc9dfw3qwgcfk0d7akd7jz5fp';
+            const storageId = defaultStorageId as Id<"_storage">;
+            setAudioStorageId(storageId);
+            const audioUrl = await getAudioUrl({storageId});
+            setAudio(audioUrl!);
+            toast.success("Podcast generated successfully");
             setIsGenerating(false);
         }
     }

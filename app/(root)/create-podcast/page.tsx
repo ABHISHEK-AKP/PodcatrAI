@@ -43,7 +43,7 @@ const CreatePodcast = () => {
   const [imagePrompt, setImagePrompt] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   
-  const [audioStorageId, setAudioStorageId] = useState<Id<"_storage"> | null>(null);
+  const [audioStorageId, setAudioStorageId] = useState('');
   const [audioUrl, setAudioUrl] = useState('');
   const [audioDuration, setAudioDuration] = useState(0);
   
@@ -75,9 +75,9 @@ const CreatePodcast = () => {
       }
       await createPodcast({
         podcastTitle : data.podcastTitle,
-        podcastDescriptions : data.podcastDescription,
-        audioUrl,
-        imageUrl,
+        podcastDescription : data.podcastDescription,
+        audioURL:audioUrl,
+        imageURL:imageUrl,
         voiceType,
         imagePrompt,
         voicePrompt,

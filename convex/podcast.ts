@@ -1,5 +1,5 @@
-import { ConvexError,:v } from ",convex/values";
-import { mutation } from "./_generated/server";
+import { ConvexError,v } from "convex/values";
+import { mutation, query } from "./_generated/server";
 
 export const getUrl = mutation({
     args:{
@@ -9,12 +9,13 @@ export const getUrl = mutation({
         return await ctx.storage.getUrl(args.storageId);
     }
 })
+
 export const createPodcast = mutation({
     args:{
             podcastTitle:v.string(),
-            podcastDescriptions:v.string(),
-            audioUrl:v.string(),
-            imageUrl:v.string(),
+            podcastDescription:v.string(),
+            audioURL:v.string(),
+            imageURL:v.string(),
             voiceType:v.string(),
             imagePrompt:v.string(),
             voicePrompt:v.string(),
@@ -44,5 +45,18 @@ export const createPodcast = mutation({
             }
         )
         return podcast;
+    }
+})
+
+export const getTrendingPodcasts = query({
+    handler: async (ctx)=>{
+        const podcasts = await ctx.db.query('podcasts').collect();
+        return podcasts;
+    }
+})
+export const getPodcastById  = query({
+    args:{podcastId:v.id('podcasts')},
+    handler: async (ctx,args)=>{
+        return await ctx.db.get(args.podcastId);
     }
 })
