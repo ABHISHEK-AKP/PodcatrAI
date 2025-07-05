@@ -17,6 +17,10 @@ const nextConfig = {
         {
           protocol: 'https',
           hostname: 'original-ibis-90.convex.cloud'
+        },
+        {
+          protocol: 'https',
+          hostname: 'img.clerk.com'
         }
       ]
     }
